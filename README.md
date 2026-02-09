@@ -108,14 +108,15 @@ mlx_lm.fuse --model ./qwen-base --adapter-path ./adapters --save-path ./whispera
 ### 2. Login to Hugging Face
 
 ```bash
-pip install huggingface_hub
-huggingface-cli login
+pip install -U huggingface_hub
+hf auth login
 ```
 
 ### 3. Upload Model
 
 ```bash
-huggingface-cli upload sapoepsilon/whispera-voice-commands ./whispera-merged
+hf repo create sapoepsilon/whispera-voice-commands --repo-type model --exist-ok
+hf upload sapoepsilon/whispera-voice-commands ./whispera-merged . --repo-type model --commit-message "publish merged model"
 ```
 
 ### 4. Update Model ID
