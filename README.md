@@ -95,7 +95,17 @@ whispera -v "git status"            # Shows progress
 
 See [full command list](https://github.com/sapoepsilon/whisperaModel#supported-commands-250).
 
-## Publishing Your Model to Hugging Face
+## Model Download (Default)
+
+WhisperaKit downloads the default model from Hugging Face automatically:
+
+- `sapoepsilon/whispera-voice-commands`
+
+You do not need to upload anything to use WhisperaKit.
+
+## Publishing a Custom Model (Optional)
+
+Only follow this section if you fine-tuned your own model and want to publish it under your own Hugging Face account (e.g. `your-username/your-model`).
 
 ### 1. Merge LoRA Adapters
 
@@ -112,11 +122,11 @@ pip install -U huggingface_hub
 hf auth login
 ```
 
-### 3. Upload Model
+### 3. Create + Upload Model Repo
 
 ```bash
-hf repo create sapoepsilon/whispera-voice-commands --repo-type model --exist-ok
-hf upload sapoepsilon/whispera-voice-commands ./whispera-merged . --repo-type model --commit-message "publish merged model"
+hf repo create your-username/your-model --repo-type model --exist-ok
+hf upload your-username/your-model ./whispera-merged . --repo-type model --commit-message "publish merged model"
 ```
 
 ### 4. Update Model ID
@@ -124,7 +134,7 @@ hf upload sapoepsilon/whispera-voice-commands ./whispera-merged . --repo-type mo
 Edit `Sources/WhisperaKit/ModelLoader.swift`:
 
 ```swift
-public static let defaultModelId = "sapoepsilon/whispera-voice-commands"
+public static let defaultModelId = "your-username/your-model"
 ```
 
 ## Custom Model
